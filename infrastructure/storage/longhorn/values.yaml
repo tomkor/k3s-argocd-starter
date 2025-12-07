@@ -59,4 +59,4 @@ longhornDriver:
       memory: 128Mi
 
 ingress:
-  enabled: true
+  enabled: false

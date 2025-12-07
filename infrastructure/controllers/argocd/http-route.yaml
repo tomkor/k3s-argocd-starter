@@ -8,7 +8,7 @@ spec:
     - name: gateway-internal
       namespace: gateway
   hostnames:
-    - "argocd.vanillax.xyz"
+    - "argocd.korczynski.pro"
   rules:
     - matches:
         - path:

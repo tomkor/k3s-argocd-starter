@@ -6,7 +6,7 @@ no-autoupdate: true
 loglevel: debug # Increased log level for more details
 transport-loglevel: debug
 ingress:
-  - hostname: hello.korczynski.pro
+  - hostname: hello.tomkor.net
     service: hello_world
     originRequest:
       # Add header logging with log-headers flag
@@ -30,7 +30,7 @@ ingress:
     service: https://cilium-gateway-gateway-external.gateway.svc.cluster.local:443
     originRequest:
       noTLSVerify: true
-      originServerName: "*.korczynski.pro"
+      originServerName: "*.tomkor.net"
       logHeaders: true
       headers:
         - name: CF-Connecting-IP
@@ -55,11 +55,11 @@ ingress:
         - name: CF-Bot-Score
         - name: CF-Challenge
         - name: CF-Bot-Management-Tag
-  - hostname: korczynski.pro
+  - hostname: tomkor.net
     service: https://cilium-gateway-gateway-external.gateway.svc.cluster.local:443
     originRequest:
       noTLSVerify: true
-      originServerName: korczynski.pro
+      originServerName: tomkor.net
       logHeaders: true
       headers:
         - name: CF-Connecting-IP

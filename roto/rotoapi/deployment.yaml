@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rotoapi
+  labels:
+    app: rotoapi
+spec:
+  minReadySeconds: 60
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rotoapi
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: rotoapi
+    spec:
+      containers:
+      - name: rotoapi
+        image: reg.korczynski.pro/roto/rotoapi:latest
+        imagePullPolicy: Always
+        ports:
+        - name: https
+          containerPort: 5555
+        envFrom:
+        - configMapRef:
+            name: rotoapi-env
+        - secretRef:
+            name: rotoapi-secrets
+      terminationGracePeriodSeconds: 180

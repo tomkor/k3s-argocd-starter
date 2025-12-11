@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: roto-pgsql
+  labels:
+    app: roto-pgsql
+spec:
+  serviceName: "roto-pgsql"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: roto-pgsql
+  template:
+    metadata:
+      labels:
+        app: roto-pgsql
+    spec:
+      containers:
+        - name: roto-pgsql
+          image: docker.io/library/postgres:17.6
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: roto-pgsql-env
+            - secretRef:
+                name: roto-pgsql-secrets
+          volumeMounts:
+            - name: rotoproduction-apphost-3b2498e0f7-roto-pgsql-data
+              mountPath: /var/lib/postgresql/data
+              subPath: roto-pgsql
+  volumeClaimTemplates:
+    - metadata:
+        name: rotoproduction-apphost-3b2498e0f7-roto-pgsql-data
+      spec:
+        accessModes: ["ReadWriteMany"]
+        resources:
+          requests:
+            storage: 1Gi

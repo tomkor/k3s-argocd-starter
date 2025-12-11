@@ -22,7 +22,7 @@ spec:
       hostname: "*.tomkor.net"
       tls:
         certificateRefs:
-          - name: cert-vanillax
+          - name: cert-tomkor
             kind: Secret
             group: "" # required
       allowedRoutes:

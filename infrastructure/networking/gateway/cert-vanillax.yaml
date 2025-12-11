@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: cert-vanillax
+  name: cert-tomkor
   namespace: gateway
   annotations:
     argocd.argoproj.io/sync-wave: "2" # Deploy after ClusterIssuer (wave 1)
@@ -15,7 +15,7 @@ spec:
     group: cert-manager.io
     kind: ClusterIssuer
     name: cloudflare-cluster-issuer
-  secretName: cert-vanillax
+  secretName: cert-tomkor
   # Best practices from cert-manager documentation
   privateKey:
     algorithm: RSA

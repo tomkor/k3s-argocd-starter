@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rotoui
+spec:
+  type: ClusterIP
+  selector:
+    app: rotoui
+  ports:
+  - name: https
+    port: 5140
+    targetPort: 5140

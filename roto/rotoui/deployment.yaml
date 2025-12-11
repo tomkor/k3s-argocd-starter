@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rotoui
+  labels:
+    app: rotoui
+spec:
+  minReadySeconds: 60
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rotoui
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: rotoui
+    spec:
+      containers:
+      - name: rotoui
+        image: reg.korczynski.pro/roto/rotoui:latest
+        imagePullPolicy: Always
+        ports:
+        - name: https
+          containerPort: 5140
+        envFrom:
+        - configMapRef:
+            name: rotoui-env
+        - secretRef:
+            name: rotoui-secrets
+      terminationGracePeriodSeconds: 180

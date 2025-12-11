@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ui
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - rotoui.tomkor.home
+  rules:
+    - host: rotoui.tomkor.home
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rotoui
+                port:
+                  number: 5140

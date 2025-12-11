@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: roto-kafka
+  labels:
+    app: roto-kafka
+spec:
+  serviceName: "roto-kafka"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: roto-kafka
+  template:
+    metadata:
+      labels:
+        app: roto-kafka
+    spec:
+      containers:
+        - name: roto-kafka
+          image: docker.io/confluentinc/confluent-local:8.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9092
+            - containerPort: 9093
+          envFrom:
+            - configMapRef:
+                name: roto-kafka-env
+          volumeMounts:
+            - name: rotoproduction-apphost-3b2498e0f7-roto-kafka-data
+              mountPath: /var/lib/kafka/data/
+              subPath: kafka-data
+  volumeClaimTemplates:
+    - metadata:
+        name: rotoproduction-apphost-3b2498e0f7-roto-kafka-data
+      spec:
+        accessModes: ["ReadWriteMany"]
+        resources:
+          requests:
+            storage: 1Gi

@@ -1,0 +1,15 @@
+namespace: roto
+
+resources:
+- roto-redis
+- roto-kafka
+- roto-pgsql
+- rotoapi
+- rotoui
+- namespace.yaml
+- dashboard.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+

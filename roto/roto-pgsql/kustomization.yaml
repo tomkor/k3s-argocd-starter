@@ -1,0 +1,21 @@
+resources:
+- statefulset.yaml
+- service.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+- name: roto-pgsql-env
+  literals:
+    - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
+    - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256 --auth-local=scram-sha-256
+    - POSTGRES_USER=postgres
+    - POSTGRES_DB=RotoDB
+    - OTEL_EXPORTER_OTLP_ENDPOINT=http://aspire-dashboard:18889
+    - OTEL_SERVICE_NAME=roto-pgsql
+
+secretGenerator:
+- name: roto-pgsql-secrets
+  envs:
+  - .roto-pgsql.secrets

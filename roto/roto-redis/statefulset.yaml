@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: roto-redis
+  labels:
+    app: roto-redis
+spec:
+  serviceName: "roto-redis"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: roto-redis
+  template:
+    metadata:
+      labels:
+        app: roto-redis
+    spec:
+      containers:
+        - name: roto-redis
+          image: docker.io/library/redis:8.2
+          imagePullPolicy: Always
+          command:
+            - /bin/sh
+          args:
+            - '-c'
+            - 'redis-server --requirepass $REDIS_PASSWORD --save 60 1'
+          ports:
+            - containerPort: 6379
+          envFrom:
+            - configMapRef:
+                name: roto-redis-env
+          volumeMounts:
+            - name: rotoproduction-apphost-3b2498e0f7-roto-redis-data
+              mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: rotoproduction-apphost-3b2498e0f7-roto-redis-data
+      spec:
+        accessModes: ["ReadWriteMany"]
+        resources:
+          requests:
+            storage: 1Gi

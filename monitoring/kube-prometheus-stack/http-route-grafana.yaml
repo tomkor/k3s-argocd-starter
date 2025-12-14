@@ -9,7 +9,7 @@ spec:
     namespace: gateway
     sectionName: https # Must match your Gateway's listeners[].name
   hostnames:
-  - "grafana.tomkor.net"
+  - "grafana.nuc.tomkor.net"
   rules:
   - matches:
     - path:

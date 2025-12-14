@@ -67,7 +67,7 @@ prometheus:
     prometheusInstance: default
     targetPort: 9402
     path: /metrics
-    interval: 60s
+    interval: 160s
     scrapeTimeout: 30s
     labels:
       release: kube-prometheus-stack

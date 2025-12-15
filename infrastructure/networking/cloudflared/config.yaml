@@ -1,4 +1,4 @@
-tunnel: nuc
+tunnel: spot-cluster
 credentials-file: /etc/cloudflared/credentials/credentials.json
 metrics: 0.0.0.0:2000
 no-autoupdate: true
@@ -26,11 +26,11 @@ ingress:
         - name: X-Forwarded-For
         - name: Accept-Language
         - name: User-Agent
-  - hostname: "*.nuc.tomkor.net"
+  - hostname: "*.spot.tomkor.net"
     service: https://cilium-gateway-gateway-external.gateway.svc.cluster.local:443
     originRequest:
       noTLSVerify: true
-      originServerName: "*.nuc.tomkor.net"
+      originServerName: "*.spot.tomkor.net"
       logHeaders: true
       headers:
         - name: CF-Connecting-IP
@@ -55,11 +55,11 @@ ingress:
         - name: CF-Bot-Score
         - name: CF-Challenge
         - name: CF-Bot-Management-Tag
-  - hostname: tomkor.net
+  - hostname: spot.tomkor.net
     service: https://cilium-gateway-gateway-external.gateway.svc.cluster.local:443
     originRequest:
       noTLSVerify: true
-      originServerName: nuc.tomkor.net
+      originServerName: spot.tomkor.net
       logHeaders: true
       headers:
         - name: CF-Connecting-IP
